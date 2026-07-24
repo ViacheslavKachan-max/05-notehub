@@ -28,7 +28,7 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["notes", page, search],
     queryFn: () =>
       fetchNotes({
@@ -74,10 +74,15 @@ export default function App() {
   const notes = data?.notes ?? [];
   const totalPages = data?.totalPages ?? 0;
 
+  const errorLabel =
+    error instanceof Error
+      ? error.message
+      : "Failed to load notes. Check token and network.";
+
   const statusLabel = isLoading
     ? "Loading notes..."
     : isError
-      ? "Failed to load notes. Check token and network."
+      ? errorLabel
       : notes.length === 0
         ? "No notes found."
         : "";

@@ -18,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      VITE_NOTEHUB_TOKEN: ${{ secrets.VITE_NOTEHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,6 +32,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Validate NoteHub token
+        run: |
+          if [ -z "$VITE_NOTEHUB_TOKEN" ]; then
+            echo "Missing VITE_NOTEHUB_TOKEN secret. Add it in Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
 
       - name: Build project
         run: npm run build:pages
