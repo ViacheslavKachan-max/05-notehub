@@ -7,19 +7,19 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import Modal from "./components/Modal/Modal";
-import NoteForm from "./components/NoteForm/NoteForm";
-import NoteList from "./components/NoteList/NoteList";
-import Pagination from "./components/Pagination/Pagination";
-import SearchBox from "./components/SearchBox/SearchBox";
+import Modal from "../Modal/Modal";
+import NoteForm from "../NoteForm/NoteForm";
+import NoteList from "../NoteList/NoteList";
+import Pagination from "../Pagination/Pagination";
+import SearchBox from "../SearchBox/SearchBox";
 import css from "./App.module.css";
 import {
   createNote,
   deleteNote,
   fetchNotes,
   type CreateNotePayload,
-} from "./services/noteService";
-import type { Note } from "./types/note";
+} from "../../services/noteService";
+import type { Note } from "../../types/note";
 
 export default function App() {
   const queryClient = useQueryClient();
